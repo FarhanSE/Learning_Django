@@ -4,8 +4,13 @@
 {% block content %}
 <h1>Hi</h1>
 <h3> {{project.title}} </h3>
+<hr>
+    {% for tag in project.tag.all %}
+        <spna style="border: 2px solid grey;"> {{tag}} </spna>
+    {% endfor %}
+<hr>
 <h3> {{project.description}} </h3>
-
+ 
 
 
 {% endblock%}

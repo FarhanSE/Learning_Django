@@ -2,22 +2,33 @@
 
 {% block content %}
 
-<h1> Hello {{name}}</h1>
-<p>How are you doing???</p>
+<table>
+  <tr>
+    
+    <th>Project</th>
+    <th>Created</th>
+    <th> Total up Votes</th>
+    <th>Vote Ratio</th>
+    <th>Edit</th>
+    <th>View</th>
 
-{% if number > 10 %}
-  <p>Number is great than 10</p>
-{% elif number == 10%}
-<p>Number is exact 10</p>
+  </tr>
+  {% for p in project %}
+  <tr>
+   
+    <td> {{p.title}} </td>
+    <td> {{p.created}} </td>
+    <td> {{p.vote_total}} </td>
+    <td> {{p.vote_ratio}} % </td>
+    <td> <a href=" /updateform/{{p.id}} ">Edit</a> </td>
+    <td> <a href=" /bye/{{p.id}} ">View</a> </td>
+    <td> <a href=" /deleteproject/{{p.id}} ">Delete</a> </td>
 
-{% else %}
-<p>Number is less than 10</p>
-{% endif %}
-<ul>
-{% for pro in project %}
 
-<li><h3>Title:  <a href="/bye/{{pro.id}}">{{pro.title}}</a> </h3></li>
 
-{% endfor %}
-</ul>
+
+  </tr>
+  {% endfor %}
+</table>
+
 {% endblock content %}
