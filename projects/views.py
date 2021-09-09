@@ -15,10 +15,10 @@ def createform(request):
     form = ProjectForm()
     content = {'form': form}
     if request.method == 'POST':
-        form = ProjectForm(request.POST)
+        form = ProjectForm(request.POST, request.FILES)
         if form.is_valid():
             form.save()
-            return redirect('hello')
+            return redirect('app')
     return render(request, 'projects/project-form.html', content)
 
 def updateform(request, pk):
@@ -26,16 +26,16 @@ def updateform(request, pk):
     form = ProjectForm(instance=project)
     content = {'form': form}
     if request.method == 'POST':
-        form = ProjectForm(request.POST, instance=project)
+        form = ProjectForm(request.POST, request.FILES,  instance=project)
         if form.is_valid():
             form.save()
-            return redirect('hello')
+            return redirect('app')
     return render(request, 'projects/project-form.html', content)
 
 def deletetemplate(request, pk):
     project = Project.objects.get(id=pk)
     if request.method == 'POST':
         project.delete()
-        return redirect('hello' )
+        return redirect('app' )
     context =  {'object': project}
     return render(request, 'projects/delete-project.html', context)

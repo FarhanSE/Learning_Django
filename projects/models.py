@@ -12,6 +12,7 @@ class Project(models.Model):
     tag = models.ManyToManyField('Tag', blank=True)
     vote_total = models.IntegerField(default=0, null=True, blank=True)
     vote_ratio = models.IntegerField(default=0, null=True, blank=True)
+    feature_image = models.ImageField(blank=True, null=True, default="default.jpg")
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
 
     def __str__(self):
