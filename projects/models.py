@@ -1,9 +1,10 @@
 from django.db import models
 import uuid
-
+from users.models import Profiles
 # Create your models here.
 
 class Project(models.Model):
+    owner = models.ForeignKey(Profiles, on_delete=models.CASCADE, null=True, blank=True)
     title = models.CharField(max_length=200)
     description = models.TextField(max_length=1000, blank=True, null=True)
     demo_link = models.CharField(max_length=1000)
@@ -14,6 +15,7 @@ class Project(models.Model):
     vote_ratio = models.IntegerField(default=0, null=True, blank=True)
     feature_image = models.ImageField(blank=True, null=True, default="default.jpg")
     id = models.UUIDField(default=uuid.uuid4, unique=True, primary_key=True, editable=False)
+    
 
     def __str__(self):
         return self.title
