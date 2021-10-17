@@ -5,13 +5,14 @@ from django.contrib.auth.models import User
 
 # @receiver(post_save, sender=Profiles)
 def profileCreated(sender, instance, created, **kwargs):
-    user = instance
-    profile = Profiles.objects.create(
-        user= user,
-        username = user.username,
-        email = user.email,
-        name = user.first_name
-    )
+    if created:
+        user = instance
+        profile = Profiles.objects.create(
+            user= user,
+            username = user.username,
+            email = user.email,
+            name = user.first_name
+        )
 post_save.connect(profileCreated, sender=User)
 
 def profileUpdated(sender, instance, created, **kwargs):
